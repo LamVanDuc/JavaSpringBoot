@@ -1,7 +1,9 @@
 package com.example.javaspringbootclass3.reponse;
 
 import java.text.NumberFormat;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class DataResponse {
 
@@ -37,24 +39,17 @@ public class DataResponse {
 
 
     public String chuyenDoiTienTe(double money , String type){
+        Map<String , Integer> collectionMap = new HashMap<>();
+        collectionMap.put("USD", 23000);
+        collectionMap.put("EUR", 23783);
+        collectionMap.put("JPY", 17163);
         double temp = 0;
 
-        switch (type.toUpperCase(Locale.ROOT)){
-            case "USD" :
-                temp = money * 23000;
-                return String.format("%.0f USD = %.0f VND",money,temp );
-
-            case "EUR":
-                temp = money * 23783;
-                return String.format("%.0f EUR = %.0f VND",money,temp );
-
-            case "JPY":
-                temp = money * 17163;
-                return String.format("%.0f JPY = %.0f VND",money,temp );
-
-            default:
-                return "Khong tim thay loai tien : \""+type +"\"";
-
+        if (collectionMap.containsKey(type)){
+            temp = money * (collectionMap.get(type));
+            return String.format("%.0f %s = %.0f VND",money,type,temp );
+        }else{
+            return "Khong tim thay loai tien : \""+type +"\"";
         }
     }
 }

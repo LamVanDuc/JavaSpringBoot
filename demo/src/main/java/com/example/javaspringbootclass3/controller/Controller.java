@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Locale;
+
 @RestController
 @RequestMapping(path = "/api")
 public class Controller {
@@ -56,7 +58,7 @@ public class Controller {
 //  http://localhost:8080/api/doitien?money=500&type=usd
     @GetMapping("/doitien")
     String doiTien(@RequestParam(value = "money")double money ,@RequestParam(value = "type")String type){
-        return dataResponse.chuyenDoiTienTe(money , type);
+        return dataResponse.chuyenDoiTienTe(money , type.toUpperCase(Locale.ROOT));
     }
 
 }
