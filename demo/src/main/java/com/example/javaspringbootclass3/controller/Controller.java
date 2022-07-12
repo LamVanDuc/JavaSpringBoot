@@ -37,7 +37,7 @@ public class Controller {
     @GetMapping("/chia")
     String chia(@RequestParam(value = "a")int a , @RequestParam(value = "b")int b){
         if (b == 0){
-            return "khong co phep chia cho 0";
+            return "Không có phép chia cho 0";
         }else {
             int temp = a/b;
             int sodu = a%b ;
@@ -57,7 +57,8 @@ public class Controller {
 
 //  http://localhost:8080/api/doitien?money=500&type=usd
     @GetMapping("/doitien")
-    String doiTien(@RequestParam(value = "money")double money ,@RequestParam(value = "type")String type){
+    public String doiTien(@RequestParam(value = "money", defaultValue = "0") double money, @RequestParam(value = "type") String type){
+        if(type.isEmpty() || type.isBlank())return "Vui lòng nhập type";
         return dataResponse.chuyenDoiTienTe(money , type.toUpperCase(Locale.ROOT));
     }
 
